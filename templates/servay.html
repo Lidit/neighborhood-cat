@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+    <link rel="shortcut icon" href="../static/favicon.png" />
+    <title>이웃냥 테스트</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <style>
+        /* .score {
+            
+            padding: 0;
+            width: 20px; 
+            height: 20px;
+            display: inline-block;
+            border: 1px solid #6865FA;
+            overflow: hidden;
+            border-color: #6865FA;
+            clip: rect(0, 0, 0, 0);
+            margin: -1px;
+            accent-color: #6865FA;
+            border-radius: 100%;
+            box-shadow: none;
+        } */
+        /* .score {
+            margin-left: 10%;
+            margin-right: 13.83%;
+        } */
+
+        /* Checked */
+        /* .score input[type=radio]:checked + label {
+            background: #6865FA;
+            color: #6865FA;
+            margin: 0;
+        } */
+
+        .header {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            margin-top: 12.192%;
+            margin-bottom: 50px;
+            align-items: center;
+            display: inline-block;
+            text-align: center;
+            margin-left: 5.026%;
+        }
+
+        .header progress {
+            position: absolute;
+            display: inline-block;
+            margin-left: 4.834%;
+            width: 70.4%;
+        }
+
+        .question {
+            /* display: block; */
+            height: clac(device-width*0.207589);
+        }
+
+        hr {
+            display: inline-block;
+            /* display: flex; */
+            text-align: left;
+            position: relative;
+            background-color: #F5F5F5;
+            margin-top: 20px;
+            margin-left: 0;
+            height: 1px;
+            border: 0;
+            padding: 0;
+            /* border: olid #F5F5F5; */
+            /* height: */
+            width: 103vw;
+        }
+
+        .radio_wrap {
+            position: relative;
+            /* display: -webkit-inline-box; */
+            width: 82.13%;
+            /* height: 0px; */
+            margin-top: 2.12vh;
+            left: 9.06%;
+            /* top: 10px; */
+            /* align-items: center; */
+
+            display: inline-block;
+            /* text-align: center; */
+            margin-left: 0px auto;
+            /* margin-right: 0 auto; */
+            /* padding-left: 0 auto; */
+            /* justify-content: center; */
+            /* text-align: center; */
+            position: relative;
+            /* Cat/Gray Scale/D9 */
+            /* border-spacing: 0px; */
+            /* background-image: url('../static/Line 1.png');
+            height: 1px;
+            background-size: 1px; */
+            /* border: 1px solid #D9D9D9; */
+            /* transform: rotate(180deg); */
+            background-image: linear-gradient(var(--line-color), var(--line-color));
+            background-repeat: no-repeat;
+            background-size: 100% var(--line-height);
+            background-position: 0 center;
+            --line-color: #D9D9D9;
+            --line-height: 2px;
+        }
+
+        .radio_wrap input[type='radio'] {
+            /* position: relative; */
+            /* justify-content: center; */
+            display: flexbox;
+            display: inline-block;
+            margin-left: 0%;
+            margin-right: 14.57%;
+            /* left: 8%; */
+            width: 20px;
+            height: 20px;
+            /* margin-left: 0%; */
+            /* padding-left: 10%; */
+            /* padding-right: 10%; */
+            background: #6865FA;
+            color: #6865FA;
+            border: none;
+
+        }
+
+        .radio_wrap input[value='5'] {
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .radio_wrap input[type='radio']:checked {
+            background: #6865FA;
+            color: #6865FA;
+            accent-color: #6865FA;
+            border-color: #6865FA;
+            border: none;
+        }
+
+        #next {
+            color: white;
+
+            position: absolute;
+            width: 150px;
+            height: 56px;
+            filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.1));
+            border: 0;
+            background: #6865FA;
+            border-radius: 42px;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            /* display: flex; */
+            align-items: center;
+            text-align: center;
+        }
+
+        #back {
+            width: 150px;
+            height: 56px;
+
+            /* Cat/Gray Scale/FF */
+            background: #FFFFFF;
+            border-radius: 15px;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            border: 0;
+
+            /* Cat/Gray Scale/43 */
+            color: #434343;
+        }
+
+        #submit {
+            display: block;
+        }
+
+        #submit button {
+            display: inline-block;
+        }
+
+        #h {
+            display: none;
+        }
+
+        #b {
+            display: none;
+        }
+
+        #c {
+            display: none;
+        }
+
+        #d {
+            display: none;
+        }
+
+        .text {
+            display: block;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 14px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .text_label {
+            font-family: 'Pretendard';
+            display: block;
+            /* display: inline-block; */
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 14px;
+            margin-top: 20px;
+            /* display: flex; */
+            /* vertical-align: middle; */
+            align-items: center;
+            text-align: center;
+
+            /* Cat/Gray Scale/8C */
+
+            color: #8C8C8C;
+
+        }
+
+        .text_label #score1 {
+            position: absolute;
+            width: 13.6%;
+            height: 32px;
+            left: 5.33%;
+        }
+
+        .text_label #score2 {
+            position: absolute;
+            width: 13.6%;
+            height: 32px;
+            left: 24.26%;
+        }
+
+        .text_label #score3 {
+            position: absolute;
+            width: 13.6%;
+            height: 32px;
+            left: 43.2%;
+        }
+
+        .text_label #score4 {
+            position: absolute;
+            width: 13.6%;
+            height: 32px;
+            left: 62.13%;
+        }
+
+        .text_label #score5 {
+            position: absolute;
+            width: 13.6%;
+            height: 32px;
+            left: 81.06%;
+        }
+
+        .y progress {
+            display: block;
+            /* margin-left: 20px; */
+        }
+    </style>
+
+    <script>
+        var que = ['y', 'h', 'b', 'c', 'd'];
+        var score = [];
+        var y_lating = 0;
+
+        $('document').ready(function () {
+            setTimeout(
+                function () {
+                    $(".y").fadeIn(1500);
+                }
+            );
+        });
+
+        function next(currentQ) {
+            if (que.indexOf(currentQ) >= 4) {
+                console.log('마지막 질문임');
+                // for (i = 1; i <= 6; i++) {
+                //     y_lating += parseInt($(".y input[name=q" + i + "_score]:checked").val());
+                //     h_lating += parseInt($(".h input[name=q" + i + "_score]:checked").val());
+                //     b_lating += parseInt($(".b input[name=q" + i + "_score]:checked").val());
+                //     c_lating += parseInt($(".c input[name=q" + i + "_score]:checked").val());
+                //     d_lating += parseInt($(".d input[name=q" + i + "_score]:checked").val());
+                // }
+                // alert("y: "+y_lating+"h: "+h_lating+"b: "+b_lating+"c: "+c_lating+"d: "+d_lating);
+                var lating = 0;
+                for (i = 1; i <= 6; i++) {
+                    // y_lating += parseInt($(".score "+currentQ+" input[name=q" + i + "_score]:checked").val());
+                    lating += parseInt($("input[name=q" + i + "_score]:checked").val());
+                }
+                score.push(lating);
+                // $.ajax({
+                //     type: "POST",
+                //     url: "/result",
+                //     data: { 'score': score },
+                //     success: function (response) {
+                //         console.log("일단 넘김");
+                //         // window.location.reload();
+                //     }
+                // });
+                submit(score);
+                return window.location.href = '/result?y='+y+'&h='+h+'&b='+b+'&c='+c+'&d='+d;
+            } else {
+                var lating = 0;
+                for (i = 1; i <= 6; i++) {
+                    // y_lating += parseInt($(".score "+currentQ+" input[name=q" + i + "_score]:checked").val());
+                    lating += parseInt($("input[name=q" + i + "_score]:checked").val());
+                }
+                score.push(lating);
+                nextQ = que[que.indexOf(currentQ) + 1];
+                $('#' + currentQ).hide();
+                $('#' + nextQ).show();
+            }
+        }
+
+        function submit(scoreList) {
+            y = scoreList[0]
+            h = scoreList[1]
+            b = scoreList[2]
+            c = scoreList[3]
+            d = scoreList[4]
+            $.ajax({
+                type: "POST",
+                url: "/result",
+                data: { 'y': y, 'h':h, 'b': b, 'c':c, 'd':d },
+                success: function (response) {
+                    console.log('전송 성공!');
+                    // window.location.href = '/result';
+                }
+            });
+        }
+
+        function back(current_q) {
+            if (que.indexOf(current_q) == 0) {
+                location.href = '/';
+            } else {
+                $('#' + current_q).hide();
+                $('#' + que[que.indexOf(current_q) - 1]).show();
+                score.pop()
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <!-- <div class="wrap"></div> -->
+    <div class="servay" id="y">
+        <div class="header">예민한<progress value="0" max="60"></progress></div>
+        <div class="question" id="q1">
+            <div class="text">집사가 배나 발을<br>만지면 싫어해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score y" id="score1" name="q1_score" value="1" />
+                <input type="radio" class="score y" id="score2" name="q1_score" value="2" />
+                <input type="radio" class="score y" id="score3" name="q1_score" value="3" />
+                <input type="radio" class="score y" id="score4" name="q1_score" value="4" />
+                <input type="radio" class="score y" id="score5" name="q1_score" value="5" />
+            </div>
+        </div>
+        <hr>
+        <div class="question" id="q2">
+            <div class="text">낯선 사람이 왔다가면<br>토를 하거나 힘들어 해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score y" name="q2_score" value="1">
+                <input type="radio" class="score y" name="q2_score" value="2">
+                <input type="radio" class="score y" name="q2_score" value="3">
+                <input type="radio" class="score y" name="q2_score" value="4">
+                <input type="radio" class="score y" name="q2_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div class="question" id="q3">
+            <div class="text">새로운 사료나 간식은<br>잘 먹지 않아요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score y" name="q3_score" value="1">
+                <input type="radio" class="score y" name="q3_score" value="2">
+                <input type="radio" class="score y" name="q3_score" value="3">
+                <input type="radio" class="score y" name="q3_score" value="4">
+                <input type="radio" class="score y" name="q3_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div class="question" id="q4">
+            <div class="text">수의사 선생님을<br>끔찍하게 무서워해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score y" name="q4_score" value="1">
+                <input type="radio" class="score y" name="q4_score" value="2">
+                <input type="radio" class="score y" name="q4_score" value="3">
+                <input type="radio" class="score y" name="q4_score" value="4">
+                <input type="radio" class="score y" name="q4_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div class="question" id="q5">
+            <div class="text">초인종 소리나 발소리<br>들리면 몸을 숨기고 도망가요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score y" name="q5_score" value="1">
+                <input type="radio" class="score y" name="q5_score" value="2">
+                <input type="radio" class="score y" name="q5_score" value="3">
+                <input type="radio" class="score y" name="q5_score" value="4">
+                <input type="radio" class="score y" name="q5_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div class="question" id="q6">
+            <div class="text">집에 낯선 사람이 오면<br>구석에서 나오지 않아요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score y" name="q6_score" value="1">
+                <input type="radio" class="score y" name="q6_score" value="2">
+                <input type="radio" class="score y" name="q6_score" value="3">
+                <input type="radio" class="score y" name="q6_score" value="4">
+                <input type="radio" class="score y" name="q6_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="submit">
+            <button type="button" id="back" onclick="back('y')">뒤로</button>
+            <button type="button" id="next" value="다음" onclick="next('y')">다음</button>
+        </div>
+    </div>
+
+    <div class="servay" id="h">
+        <div class="header">활발한<progress value="0" max="60"></progress></div>
+        <div id="q1">
+            <div class="text">장난감이 없어도<br>이곳저곳 뛰어다녀요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q1_score" value="1">
+                <input type="radio" class="score" name="q1_score" value="2">
+                <input type="radio" class="score" name="q1_score" value="3">
+                <input type="radio" class="score" name="q1_score" value="4">
+                <input type="radio" class="score" name="q1_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q2">
+            <div class="text">구석에서 튀어나와<br>술래잡기 놀이를 해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q2_score" value="1">
+                <input type="radio" class="score" name="q2_score" value="2">
+                <input type="radio" class="score" name="q2_score" value="3">
+                <input type="radio" class="score" name="q2_score" value="4">
+                <input type="radio" class="score" name="q2_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q3">
+            <div class="text">사용하는 장난감이<br>자주 망가져요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q3_score" value="1">
+                <input type="radio" class="score" name="q3_score" value="2">
+                <input type="radio" class="score" name="q3_score" value="3">
+                <input type="radio" class="score" name="q3_score" value="4">
+                <input type="radio" class="score" name="q3_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q4">
+            <div class="text">끈, 공등의 물건들을<br>스스로 움직이게 만들면서 놀아요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q4_score" value="1">
+                <input type="radio" class="score" name="q4_score" value="2">
+                <input type="radio" class="score" name="q4_score" value="3">
+                <input type="radio" class="score" name="q4_score" value="4">
+                <input type="radio" class="score" name="q4_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q5">
+            <div class="text">새로운장소에 가도<br>금방 적응해서 돌아다녀요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q5_score" value="1">
+                <input type="radio" class="score" name="q5_score" value="2">
+                <input type="radio" class="score" name="q5_score" value="3">
+                <input type="radio" class="score" name="q5_score" value="4">
+                <input type="radio" class="score" name="q5_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q6">
+            <div class="text">놀이 시간을 많이 가져도<br>도저히 지치지를 않아요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q6_score" value="1">
+                <input type="radio" class="score" name="q6_score" value="2">
+                <input type="radio" class="score" name="q6_score" value="3">
+                <input type="radio" class="score" name="q6_score" value="4">
+                <input type="radio" class="score" name="q6_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="submit">
+            <button type="button" id="back" onclick="back('h')">뒤로</button>
+            <button type="button" id="next" value="다음" onclick="next('h')">다음</button>
+        </div>
+    </div>
+
+    <div class="servay" id="b">
+        <div class="header">본능적인<progress value="0" max="60"></progress></div>
+        <div id="q1">
+            <div class="text">좋아하는 이불에<br>꾹꾹이를 해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q1_score" value="1">
+                <input type="radio" class="score" name="q1_score" value="2">
+                <input type="radio" class="score" name="q1_score" value="3">
+                <input type="radio" class="score" name="q1_score" value="4">
+                <input type="radio" class="score" name="q1_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q2">
+            <div class="text">새벽에 꼭 우다다<br>뛰어다녀야 잠을 자요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q2_score" value="1">
+                <input type="radio" class="score" name="q2_score" value="2">
+                <input type="radio" class="score" name="q2_score" value="3">
+                <input type="radio" class="score" name="q2_score" value="4">
+                <input type="radio" class="score" name="q2_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q3">
+            <div class="text">움직이는 것들을<br>지나치지 못하고 잡으려 해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q3_score" value="1">
+                <input type="radio" class="score" name="q3_score" value="2">
+                <input type="radio" class="score" name="q3_score" value="3">
+                <input type="radio" class="score" name="q3_score" value="4">
+                <input type="radio" class="score" name="q3_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q4">
+            <div class="text">뛰어다니다가<br>갑자기 높은 곳으로 점프해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q4_score" value="1">
+                <input type="radio" class="score" name="q4_score" value="2">
+                <input type="radio" class="score" name="q4_score" value="3">
+                <input type="radio" class="score" name="q4_score" value="4">
+                <input type="radio" class="score" name="q4_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q5">
+            <div class="text">창밖으로 새가 보이면<br>갸갹갸갹 채터링을 해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q5_score" value="1">
+                <input type="radio" class="score" name="q5_score" value="2">
+                <input type="radio" class="score" name="q5_score" value="3">
+                <input type="radio" class="score" name="q5_score" value="4">
+                <input type="radio" class="score" name="q5_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q6">
+            <div class="text">일상 생활 속에서<br>자주 달리기 시합을 해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q6_score" value="1">
+                <input type="radio" class="score" name="q6_score" value="2">
+                <input type="radio" class="score" name="q6_score" value="3">
+                <input type="radio" class="score" name="q6_score" value="4">
+                <input type="radio" class="score" name="q6_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="submit">
+            <button type="button" id="back" onclick="back('b')">뒤로</button>
+            <button type="button" id="next" value="다음" onclick="next('b')">다음</button>
+        </div>
+    </div>
+
+    <div class="servay" id="c">
+        <div class="header">친밀한<progress value="0" max="60"></progress></div>
+        <div id="q1">
+            <div class="text">낯선 사람이<br>만지려고 해도 좋아해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q1_score" value="1">
+                <input type="radio" class="score" name="q1_score" value="2">
+                <input type="radio" class="score" name="q1_score" value="3">
+                <input type="radio" class="score" name="q1_score" value="4">
+                <input type="radio" class="score" name="q1_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q2">
+            <div class="text">안겨있는 걸 좋아하고<br>무릎 위에 잘 올라와요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q2_score" value="1">
+                <input type="radio" class="score" name="q2_score" value="2">
+                <input type="radio" class="score" name="q2_score" value="3">
+                <input type="radio" class="score" name="q2_score" value="4">
+                <input type="radio" class="score" name="q2_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q3">
+            <div class="text">친하지 않은 사람에게도<br>골골송을 해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q3_score" value="1">
+                <input type="radio" class="score" name="q3_score" value="2">
+                <input type="radio" class="score" name="q3_score" value="3">
+                <input type="radio" class="score" name="q3_score" value="4">
+                <input type="radio" class="score" name="q3_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q4">
+            <div class="text">집사에게 온 몸을 비비며<br>졸졸 따라다녀요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q4_score" value="1">
+                <input type="radio" class="score" name="q4_score" value="2">
+                <input type="radio" class="score" name="q4_score" value="3">
+                <input type="radio" class="score" name="q4_score" value="4">
+                <input type="radio" class="score" name="q4_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q5">
+            <div class="text">손을 뻗으면 몸이나 얼굴을<br>손바닥에 갖다 대려고 해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q5_score" value="1">
+                <input type="radio" class="score" name="q5_score" value="2">
+                <input type="radio" class="score" name="q5_score" value="3">
+                <input type="radio" class="score" name="q5_score" value="4">
+                <input type="radio" class="score" name="q5_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q6">
+            <div class="text">이름을 부르면<br>야옹하면서 반응해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q6_score" value="1">
+                <input type="radio" class="score" name="q6_score" value="2">
+                <input type="radio" class="score" name="q6_score" value="3">
+                <input type="radio" class="score" name="q6_score" value="4">
+                <input type="radio" class="score" name="q6_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="submit">
+            <button type="button" id="back" onclick="back('c')">뒤로</button>
+            <button type="button" id="next" value="다음" onclick="next('c')">다음</button>
+        </div>
+    </div>
+
+    <div class="servay" id="d">
+        <div class="header">독립적인<progress value="0" max="60"></progress></div>
+        <div id="q1">
+            <div class="text">낮에는<br>거의 잠만 자요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q1_score" value="1">
+                <input type="radio" class="score" name="q1_score" value="2">
+                <input type="radio" class="score" name="q1_score" value="3">
+                <input type="radio" class="score" name="q1_score" value="4">
+                <input type="radio" class="score" name="q1_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q2">
+            <div class="text">몸을 긴장한 상태에서<br>양 옆 어깨쪽을 그루밍해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q2_score" value="1">
+                <input type="radio" class="score" name="q2_score" value="2">
+                <input type="radio" class="score" name="q2_score" value="3">
+                <input type="radio" class="score" name="q2_score" value="4">
+                <input type="radio" class="score" name="q2_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q3">
+            <div class="text">새로운 물건이 생기면<br>구석구석 냄새를 맡고 탐색해요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q3_score" value="1">
+                <input type="radio" class="score" name="q3_score" value="2">
+                <input type="radio" class="score" name="q3_score" value="3">
+                <input type="radio" class="score" name="q3_score" value="4">
+                <input type="radio" class="score" name="q3_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q4">
+            <div class="text">어두운 곳이나 구석에서<br>잘 나오지 않아요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q4_score" value="1">
+                <input type="radio" class="score" name="q4_score" value="2">
+                <input type="radio" class="score" name="q4_score" value="3">
+                <input type="radio" class="score" name="q4_score" value="4">
+                <input type="radio" class="score" name="q4_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q5">
+            <div class="text">햇빛이 드는 곳에서<br>여유로운 시간을 보내요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q5_score" value="1">
+                <input type="radio" class="score" name="q5_score" value="2">
+                <input type="radio" class="score" name="q5_score" value="3">
+                <input type="radio" class="score" name="q5_score" value="4">
+                <input type="radio" class="score" name="q5_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="q6">
+            <div class="text">곁에 있다가도<br>금새 다른 곳으로 가버려요</div>
+            <div class="text_label">
+                <div id="score1">전혀<br>아니야!</div>
+                <div id="score2">아니야</div>
+                <div id="score3">보통이야</div>
+                <div id="score4">조금 그래</div>
+                <div id="score5">맞아!</div>
+            </div>
+            <br>
+            <div class="radio_wrap">
+                <input type="radio" class="score" name="q6_score" value="1">
+                <input type="radio" class="score" name="q6_score" value="2">
+                <input type="radio" class="score" name="q6_score" value="3">
+                <input type="radio" class="score" name="q6_score" value="4">
+                <input type="radio" class="score" name="q6_score" value="5">
+            </div>
+        </div>
+        <hr>
+        <div id="submit">
+            <button type="button" id="back" onclick="back('d')">뒤로</button>
+            <button type="button" id="next" value="다음" onclick="next('d')">다음</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

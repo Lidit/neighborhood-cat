@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="Chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="../static/favicon.png">
+    <title>이웃냥 성향테스트</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+    <link rel="stylesheet" type="text/css" href="../static/index.css" />
+    <!-- <script src="index.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function start_servay(){
+            $.ajax({
+                type: "POST", // POST 방식으로 요청하겠다.
+                url: "/servay", // /memo라는 url에 요청하겠다.
+                data: { }, // 데이터를 주는 방법
+                success: function (response) { // 성공하면
+                    if (response["result"] == "success") {
+                        alert("이동 성공");
+                        // 3. 성공 시 페이지 새로고침하기
+                        window.location.reload();
+                    } else {
+                        alert("서버 오류!")
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <img class="vec1" src="../static/Vector.svg">
+        <img class="vec2" src="../static/Vector2.svg">
+        <img class='logo' src="../static/logo_cat.png">
+        <div class="content">이웃냥<br>성향테스트</div>
+        <div class="sub_content">총 검사 시간은 5분 내외에요.<br>
+            5가지 종류의 카테고리가 존재해요.<br>
+            정확한 성향 파악을 위해 <br>
+            중립을 최대한 피해주세요</div>
+        <button type="button" class="start" id="start" onclick="window.location.href='/servay'">시작하기</button>
+    </div>
+</body>
+
+</html>

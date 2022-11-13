@@ -1,0 +1,127 @@
+
+html {
+    max-width: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    touch-action: none;
+    background: #7E8BFF;
+}
+
+#main {
+
+    background: #7E8BFF;
+}
+
+.vec1 {
+    /* Vector */
+
+    /* display: block; */
+    position: absolute;
+    width: 400px;
+    height: 468.76px;
+    left: -25.8%;
+    top: 26px;
+
+    /* background: linear-gradient(90deg, #6865FA 0%, #7E8BFF 99.99%, #6865FA 100%); */
+}
+
+.vec2 {
+    display: block;
+    position: absolute;
+    width: 476px;
+    height: 492px;
+    left: 18.13%;
+    top: 472px;
+    transform: rotate(-14.17deg);
+}
+
+.start {
+    /* Rectangle 439 */
+
+    display: inline-block;
+    position: absolute;
+    width: 281px;
+    height: 52px;
+    left: 12.53%;
+    top: 691px;
+    
+    /* font */
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-size: 20px;
+
+    /* Cat/Primary Color/Primary dark */
+
+    background: #624AF4;
+    border-radius: 15px;
+    border: none;
+    color: white;
+
+}
+
+
+.logo {
+    position: absolute;
+    width: 330px;
+    height: 330px;
+    left: 7.69%;
+    top: 95px;
+    background-image: none;
+}
+
+.content {
+    /* 이웃냥 성향테스트 */
+
+    position: absolute;
+    width: 230px;
+    height: 102px;
+    left: 19.46%;
+    top: 421px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    display: block;
+    align-items: center;
+    text-align: center;
+
+
+    color: #FFFFFF;
+}
+
+/* .line1 div {
+    display: block;
+    position: relative;
+}
+.line2 div{
+    display: block;
+    position: relative;
+} */
+.sub_content {
+    position: absolute;
+    width: 271px;
+    height: 124px;
+    left: 13.86%;
+    top: 523px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 179%;
+    /* or 25px */
+
+    display: block;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+}

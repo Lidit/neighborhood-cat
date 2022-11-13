@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/favicon.png">
+    <title>이웃냥 성향테스트</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.0/dist/chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <style>
+        .top {
+            margin-top: 92px;
+            margin-left: 5.333vw;
+        }
+
+        .end input{
+            text-align: right;
+        }
+        .main_info {
+            text-align: center;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        .main_info #sub1 {
+            {% if code[0] == 'c'%}
+            color: #FD8E8C;
+            background: #FEE8E8;
+            {% elif code[0] == 'h'%}
+            color: #79C4AD;
+            background: #F4FBF9;
+            {% elif code[0] == 'b'%}
+            color: #FF9C84;
+            background: #FEE6E0;
+            {% elif code[0] == 'd'%}
+            color: #749CCA;
+            background: #F1F5FA;
+            {% endif %}
+            border-radius: 17px;
+            font-size: 32px;
+            line-height: 38px;
+            display: inline-block;
+            width: 48vw;
+        }
+
+        .main_info #sub2 {
+            margin-top: 12px;
+            font-size: 18px;
+            line-height: 21px;
+            color: #6865FA;
+
+        }
+
+        .summary {
+            padding-top: 20px;
+            padding-left: 10.66vw;
+            padding-right: 10.66vw;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 24px;
+            color: #262626;
+            padding-bottom: 30px;
+            background-color: white;
+            text-align: left;
+        }
+
+        .conclusion {
+            margin-top: 32px;
+            margin-left: 10.66vw;
+            margin-right: 10.66vw;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 24px;
+            color: #262626;
+            margin-bottom: 30px;
+        }
+
+        .white_bg {
+            position: absolute;
+            width: 100vw;
+            height: 383px;
+            left: 0px;
+            top: 270px;
+            z-index: -1;
+
+            /* Cat/Gray Scale/FF */
+
+            background: #FFFFFF;
+        }
+
+        #bottom {
+            position: absolute;
+            /* top: 1294px; */
+            height: 401px;
+            width: 100vw;
+            z-index: -1;
+            background: #FFFFFF;
+        }
+
+        body {
+            margin: 0;
+            /* margin: 0;
+            position: fixed;
+            z-index: 0;
+            background-image: url('../static/result_bg_1.png');
+            background-color: #F9D3D2;
+            background-image: url('../static/result_bg_1.png');
+            background-position:  78.44px 0, 78.93px 0, 0 0, 0 0;
+            background-size: 78.44px 78.93px;
+            background-repeat: repeat; */
+        }
+
+        .end {
+            display: inline;
+            height: 32px;
+            
+            vertical-align: middle;
+        }
+        .end #end_text {
+            color: #6865FA;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .end #back {
+            display: inline;
+            background-image: url("../static/bt_back.png");
+            width: 32px;
+            height: 32px;
+            border: none;
+            padding: 0;
+            border-radius: 16px;
+            margin-left: 40.8vw;
+            vertical-align: middle;
+        }
+
+        .symbol_cat {
+            /* position: relative; */
+            /* display: flex; */
+        }
+
+        .bg {
+            margin: 0;
+            position: absolute;
+            z-index: -1;
+            height: 330%;
+            width: 330%;
+            left: -150%;
+            top: -100%;
+            {% if code == 'cdhb' or code=='cdbh' or code == 'cbdh' %}
+            background-color: #F9D3D2;
+            background-image: url('../static/result_bg_1.png');
+            {% elif code == 'chbd' or code=='chdb' or code == 'cbhd' %}
+            background-color: #F8D0CF;
+            background-image: url('../static/result_bg_1.png');
+            {% elif code == 'hcdb' or code=='hcbd' or code == 'hbcd' %}
+            background-color: #F4FDFA;
+            background-image: url('../static/result_bg_h.png');
+            {% elif code == 'hdcb' or code=='hdbc' or code == 'hbcd' %}
+            background-color: #DEF7EF;
+            background-image: url('../static/result_bg_h.png');
+            {% elif code == 'bdhc' or code=='bdch' or code == 'bhdc' %}
+            background-color: #FCE3DC;
+            background-image: url('../static/result_bg_ss.png');
+            {% elif code == 'bchd' or code=='bcdh' or code == 'bhcd' %}
+            background-color: #FED7CC;
+            background-image: url('../static/result_bg_bt.png');
+            {% elif code == 'dcbh' or code=='dchb' or code == 'dhcb' %}
+            background-color: #F7FAFE;
+            background-image: url('../static/result_bg_sj.png');
+            {% elif code == 'dbch' or code=='dbhc' or code == 'dhbc' %}
+            background-color: #DCE8F8;
+            background-image: url('../static/result_bg_gp.png');
+            {% endif %}
+
+            /* {% if code[0] == 'c' %}
+            background-image: url('../static/result_bg_1.png');
+            {% elif code[0] == 'h' %}
+            background-image: url('../static/result_bg_h.png');
+            {% elif code[0] == 'b' %}
+            background-image: url('../static/result_bg_1.png');
+            {% elif code[0] == 'd' %}
+            background-image: url('../static/result_bg_1.png');
+            {% endif %} */
+            /* background-position:  3px 0, 5px 0, 3px 0, 3px 0; */
+            background-size: 78.44px 78.93px;
+            background-repeat: repeat;
+            transform: matrix(0.77, -0.67, 0.62, 0.76, 0, 0);
+        }
+
+        .bg::before {
+            /* transform: rotate(-30deg); */
+        }
+
+        
+        #header1 {
+            /* position: relative; */
+            /* position: absolute; */
+            display: inline-block;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+
+            {% if code[0]=='c' %}
+            color: #FDACAB;
+            {% elif code[0]=='h' %}
+            color: #79C3AD;
+            {% elif code[0]=='b' %}
+            color: #FF9C84;
+            {% elif code[0]=='d' %}
+            color: #C9DFF8;
+            {% endif %}
+
+            margin-top: 48px;
+            margin-left: 9.86vw;
+        }
+
+        #header2 {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            color: #FFFFFF;
+            margin-left: 9.86vw;
+            margin-top: 10px;
+        }
+
+        .analysisResult {
+            background-image: url("../static/25\ 1.png");
+            background-color: #6865FA;
+            display: block;
+            margin-top: -10px;
+            height: 610px;
+        }
+
+        #scores {
+            /* margin-bottom: 48px; */
+        }
+
+        #progressWrap{
+            display: inline-block;
+            /* vertical-align: middle; */
+            height: 12px;
+            margin-bottom: 20px;
+        }
+        #progressWrap:nth-child(1){
+            width: 1466666666666667vw;
+        }
+        
+        #progressWrap div{
+            display: inline-block;
+            margin-left: 9.6vw;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 12px;
+            color: #FFFFFF;
+        }
+
+        #chartContainer {
+            width: 100vw;
+            text-align: center;
+            align-items: center;
+        }
+        
+        #imgLabel {
+            text-align: center;
+            /* align-items: center; */
+            margin-top: 16px;
+            /* display: flex; */
+            /* margin-left: 10px; */
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            {% if code[0] == 'c' %}
+            color: #FD8E8C;
+            {% elif code[0] == 'h' %}
+            color: #79C3AD;
+            {% elif code[0] == 'b' %}
+            color: #FF9C84;
+            {% elif code[0] == 'd' %}
+            color: #749CCA;
+            {% endif %}
+        }
+        
+        #item {
+            display: inline-block;
+            margin-right: 5.06666vw;
+        }
+
+        #imgWrap img{
+            border-radius: 90px;
+            /* margin-right: 5.06666vw; */
+            /* display: inline-block; */
+        }
+        #imgWrap:nth-child(1) {
+            margin-left: 12.53vw;
+        }
+
+        #items {
+            margin-top: 52px;
+        }
+
+        #header3 {
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 29px;
+            color: #6865FA;
+            margin-left: 10.66vw;
+            margin-top: 43px;
+        }
+        #scoreInt{
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            /* display: flex; */
+            /* position: absolute; */
+            right: 11.733vw;
+        }
+
+        progress {
+            appearance: none;
+            /* position: absolute; */
+            height: 12px;
+            width: 49.333vw;
+            /* left: 27.733vw; */
+            margin-left: 3.46666666666667vw;
+        }
+        progress::-webkit-progress-bar{
+            background: none;
+            border-radius: 40px;
+            height: 12px;
+        }
+
+        #yBar::-webkit-progress-value{
+            border-radius: 40px;
+            background: #EEC569;
+            border-radius: 40px;
+            height: 12px;
+        }
+        
+        #hBar::-webkit-progress-value{
+            border-radius: 40px;
+            background: #79C4AD;
+            border-radius: 40px;
+            height: 12px;
+        }
+        #bBar::-webkit-progress-value{
+            border-radius: 40px;
+            background: #FF9C84;
+            border-radius: 40px;
+            height: 12px;
+        }
+        #cBar::-webkit-progress-value{
+            border-radius: 40px;
+            background: #FDACAB;
+            border-radius: 40px;
+            height: 12px;
+        }
+        #dBar::-webkit-progress-value{
+            border-radius: 40px;
+            background: #C9DFF8;
+            border-radius: 40px;
+            height: 12px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    {% if code == 'cdhb' or code=='cdbh' or code == 'cbdh' %}
+    <!-- 한가한 백수 -->
+    <div class="content">
+        <div class="top">
+            <div class="bg"></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+        </div>
+        <div class="main_info">
+            <div class="white_bg" id="top"></div>
+            <img class="symbol_cat" src="../static/Group 1693.png">
+            <div id="sub1">한가한 백수</div>
+            <div id="sub2">"귀찮지만 집사는 좋아해!"</div>
+            <div class="summary">
+                매사에 관심이 없는 듯 살아가지만, 반려인에게 만큼은 누구보다 다정한 모습으로 다가갑니다. 낯선 사람보다는 익숙한 사람을 좋아하며, 다수의 반려인이 있는
+                가정에서 크는 아이라면 특정 보호자만 따르고 좋아할 수 있습니다. 낚싯대나 어묵으로 놀아줘도, 장난감에 대한 관심이 오래 유지되지 않는 편입니다. 경계가 많은 편으로, 매사에 무관심하거나 다가가는
+                것을
+                꺼려합니다.
+            </div>
+        </div>
+        <div class="analysisResult">
+            <div id="header1">한가한 루루를</div>
+            <div id="header2">자세하게 분석해봤어요.</div>
+            <div id="chartContainer">
+                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+            </div>
+            <div id="scores">
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{c}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">활발한</div><progress id="hBar" max="{{c}}" min="0" value="{{ h }}"></progress><div id="scoreInt">{{h|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">본능적인</div><progress id="bBar" max="{{c}}" min="0" value="{{ b }}"></progress><div id="scoreInt">{{b|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">친밀한</div><progress id="cBar" max="{{c}}" min="0" value="{{ c }}"></progress><div id="scoreInt">{{c|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">독립적인</div><progress id="dBar" max="{{c}}" min="0" value="{{ d }}"></progress><div id="scoreInt">{{d|int}}</div></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div id="header3">이런 걸 좋아해요!</div>
+            <div id="items">
+                <div id="imgWrap">
+                    <div id="item">
+                        <img src="../static/숨숨집.png">
+                        <div id="imgLabel" >숨숨집</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/이불.png">
+                        <div id="imgLabel">이불</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/츄르.png">
+                        <div id="imgLabel">츄르</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="conclusion">
+                이러한 관심을 아껴두었다가 반려인에게 온전히 주는 것으로 볼 수 있습니다. 특히 새로운 모든 것에 대하여 낯을 많이 가리므로, 마음을 열거나 호기심을 갖고 다가가는 데에 필요한 시간이 긴
+                편입니다. 반려인 이외의 것들에겐 무관심하거나 경계하고 도망치지만, 반려인에게 관심과 애정을 모두 주는 유형입니다.
+            </div>
+        </div>
+    </div>
+
+    {% elif code == 'chbd' or code=='chdb' or code == 'cbhd' %}
+    <!-- 다정한 친구 -->
+    <div class="content">
+        <div class="top">
+            <div class="bg"></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+        </div>
+        <div class="main_info">
+            <div class="white_bg" id="top"></div>
+            <img class="symbol_cat" src="../static/Group 1694.png">
+            <div id="sub1">다정한 친구</div>
+            <div id="sub2">“발랄하지만 시간이 필요해!”</div>
+            <div class="summary">이 유형은 활발한 겁쟁이라는 말 한마디로 정의할 수 있습니다. 활발하고 밝지만 겁쟁이라 낯을 가리느라 처음에는 잠잠히 있을지 모르지만 경계하는 마음이 풀리는 순간, 그 발랄함이 온 집안을 채울 것입니다. 어느 정도의 신중함이 전반적으로 마음 속에 자리잡고 있어, 사람이나 물건에 익숙해지고, 환경과 상황의 변화에 적응하는 데에는 시간이 필요합니다. </div>
+        </div>
+        <div class="analysisResult">
+            <div id="header1">다정한 우니를 </div>
+            <div id="header2">자세하게 분석해봤어요.</div>
+            <div id="chartContainer">
+                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+            </div>
+            <div id="scores">
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{c}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">활발한</div><progress id="hBar" max="{{c}}" min="0" value="{{ h }}"></progress><div id="scoreInt">{{h|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">본능적인</div><progress id="bBar" max="{{c}}" min="0" value="{{ b }}"></progress><div id="scoreInt">{{b|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">친밀한</div><progress id="cBar" max="{{c}}" min="0" value="{{ c }}"></progress><div id="scoreInt">{{c|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">독립적인</div><progress id="dBar" max="{{c}}" min="0" value="{{ d }}"></progress><div id="scoreInt">{{d|int}}</div></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div id="header3">이런 걸 좋아해요!</div>
+            <div id="items">
+                <div id="imgWrap">
+                    <div id="item">
+                        <img src="../static/낚싯대.png">
+                        <div id="imgLabel" >낚시대</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/캣닢.png">
+                        <div id="imgLabel">캣닢</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/코인사.png">
+                        <div id="imgLabel">코 인사</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="conclusion">
+                하지만 그 마음이 한번 열리면 특유의 발랄함이 마구 뿜어져 나올 것입니다. 익숙한 장소에서 매일 보는 사람들과 신나게 놀기를 가장 좋아합니다. 그만큼 반려인에 대한 애정표현은 결코 확실하게 하는 편입니다. 놀고 싶거나 쓰다듬기 받기를 원하는 마음을 솔직하게 표현하는 유형입니다.
+            </div>
+        </div>
+    </div>
+
+    {% elif code == 'hcdb' or code=='hcbd' or code == 'hbcd' %}
+    <div class="content">
+        <div class="top">
+            <div class="bg"></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+        </div>
+        <div class="main_info">
+            <div class="white_bg" id="top"></div>
+            <img class="symbol_cat" src="../static/Group 1695.png">
+            <div id="sub1">게으른 참견쟁이</div>
+            <div id="sub2">“집사가 제일 좋아!”"</div>
+            <div class="summary">활동적인 놀이는 선호하지 않지만 반려인과 보내는 시간은 좋아합니다. 기본적으로 사람을 좋아하는 성향이지만, 마구 들떠서 열렬히 마음을 표현하기보단 묵묵히 곁에 누워 손길을 받고 함께 있고자 하는 편입니다. 낯선 사람의 방문에도 크게 동요하거나 경계하지 않고, 새로운 물건이 집에 나타나도 긴장하지 않습니다.</div>
+        </div>
+        <div class="analysisResult">
+            <div id="header1">게으른 치치를</div>
+            <div id="header2">자세하게 분석해봤어요.</div>
+            <div id="chartContainer">
+                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+            </div>
+            <div id="scores">
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{h}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">활발한</div><progress id="hBar" max="{{h}}" min="0" value="{{ h }}"></progress><div id="scoreInt">{{h|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">본능적인</div><progress id="bBar" max="{{h}}" min="0" value="{{ b }}"></progress><div id="scoreInt">{{b|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">친밀한</div><progress id="cBar" max="{{h}}" min="0" value="{{ c }}"></progress><div id="scoreInt">{{c|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">독립적인</div><progress id="dBar" max="{{h}}" min="0" value="{{ d }}"></progress><div id="scoreInt">{{d|int}}</div></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div id="header3">이런 걸 좋아해요!</div>
+            <div id="items">
+                <div id="imgWrap">
+                    <div id="item">
+                        <img src="../static/오뎅꼬치.png">
+                        <div id="imgLabel" >오뎅꼬치</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/스크래처.png">
+                        <div id="imgLabel">스크래쳐</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/포옹.png">
+                        <div id="imgLabel">포옹</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="conclusion">
+                사냥놀이는 그리 좋아하지 않지만 반려인에 대한 애정과 관심은 그치지 않습니다. 애교를 부리며 반려인에게 앵기기도 하고, 반려인이 무언가에 열중하고 있어도 다가가서 관심을 구해, 곤란한 상황이 펼쳐지곤 합니다.
+            </div>
+        </div>
+    </div>
+
+    {% elif code == 'hdcb' or code=='hdbc' or code == 'hbcd' %}
+    <div class="content">
+        <div class="top">
+            <div class="bg"></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+        </div>
+        <div class="main_info">
+            <div class="white_bg" id="top"></div>
+            <img class="symbol_cat" src="../static/Group 1696.png">
+            <div id="sub1">미지의 여행자</div>
+            <div id="sub2">“집사, 나를 받들어라!”</div>
+            <div class="summary">도도한 성격이지만 놀 때엔 열정적인 편입니다. 자신만의 울타리가 확실한 편이기 때문에 사람과 어느 정도의 거리를 두며 살아가는 편일 수 있습니다. 특유의 당당함과 도도함 덕분에 가끔 고양이가 집주인이 된 듯한 느낌을 받을 때가 종종 있어, 정말 집사가 된 기분을 느낄 수 있습니다. </div>
+        </div>
+        <div class="analysisResult">
+            <div id="header1">미지의 가루를</div>
+            <div id="header2">자세하게 분석해봤어요.</div>
+            <div id="chartContainer">
+                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+            </div>
+            <div id="scores">
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{h}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">활발한</div><progress id="hBar" max="{{h}}" min="0" value="{{ h }}"></progress><div id="scoreInt">{{h|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">본능적인</div><progress id="bBar" max="{{h}}" min="0" value="{{ b }}"></progress><div id="scoreInt">{{b|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">친밀한</div><progress id="cBar" max="{{h}}" min="0" value="{{ c }}"></progress><div id="scoreInt">{{c|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">독립적인</div><progress id="dBar" max="{{h}}" min="0" value="{{ d }}"></progress><div id="scoreInt">{{d|int}}</div></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div id="header3">이런 걸 좋아해요!</div>
+            <div id="items">
+                <div id="imgWrap">
+                    <div id="item">
+                        <img src="../static/낚싯대.png">
+                        <div id="imgLabel" >낚시대</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/캣닢쿠션.png">
+                        <div id="imgLabel">캣닢 쿠션</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/터널.png">
+                        <div id="imgLabel">터널</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="conclusion">
+                환경이 변해도 큰 신경을 쓰지 않고 평소와 같이, 평온한 일상을 보내는 모습을 보여줍니다. 혼자 있는 시간을 보낼 때 더 즐거워 보이는 때도 있는 듯 합니다. 이 유형에게 어울리는 단어들을 꼽자면 명확한 의사표현, 도도함, 당당함, 명랑함 입니다. 혼자서도 잘 놀며 혼자 있기를 즐기는 자발적 아싸와 같은 유형입니다. 
+            </div>
+        </div>
+    </div>
+
+    {% elif code == 'bdhc' or code=='bdch' or code == 'bhdc' %}
+    <!-- 새침한 사색가 -->
+    <div class="content">
+        <div class="top">
+            <div class="bg"></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+        </div>
+        <div class="main_info">
+            <div class="white_bg" id="top"></div>
+            <img class="symbol_cat" src="../static/Group 1697.png">
+            <div id="sub1">새침한 사색가</div>
+            <div id="sub2">“산은 산이요, 물은 물이다!”</div>
+            <div class="summary">집 안에 낯선 가구나 물건이 생길 때는 약간의 관심을 보이다가도 금새 적응하고 변화를 받아들여, 다시금 평온한 상태로 돌아옵니다. 사람이 다가와 인사를 건네도 그다지 신경쓰지 않는 듯 보입니다. 매순간 무덤덤해 보일 뿐입니다. 여유롭게 누워있거나 걸어 다니는 모습을 보기 쉽습니다. 해탈한 것 같기도 하면서도 그냥 대충 사는 것 같기도 한 유형입니다. </div>
+        </div>
+        <div class="analysisResult">
+            <div id="header1">새침한 미미를</div>
+            <div id="header2">자세하게 분석해봤어요.</div>
+            <div id="chartContainer">
+                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+            </div>
+            <div id="scores">
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{b}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">활발한</div><progress id="hBar" max="{{b}}" min="0" value="{{ h }}"></progress><div id="scoreInt">{{h|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">본능적인</div><progress id="bBar" max="{{b}}" min="0" value="{{ b }}"></progress><div id="scoreInt">{{b|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">친밀한</div><progress id="cBar" max="{{b}}" min="0" value="{{ c }}"></progress><div id="scoreInt">{{c|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">독립적인</div><progress id="dBar" max="{{b}}" min="0" value="{{ d }}"></progress><div id="scoreInt">{{d|int}}</div></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div id="header3">이런 걸 좋아해요!</div>
+            <div id="items">
+                <div id="imgWrap">
+                    <div id="item">
+                        <img src="../static/캣타워.png">
+                        <div id="imgLabel" >캣타워</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/동결건조간식.png">
+                        <div id="imgLabel">동결 건조 간식</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/터널.png">
+                        <div id="imgLabel">터널</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="conclusion">
+                환경이 변해도 큰 신경을 쓰지 않고 평소와 같이, 평온한 일상을 보내는 모습을 보여줍니다. 혼자 있는 시간을 보낼 때 더 즐거워 보이는 때도 있는 듯 합니다. 이 유형에게 어울리는 단어들을 꼽자면 명확한 의사표현, 도도함, 당당함, 명랑함 입니다. 혼자서도 잘 놀며 혼자 있기를 즐기는 자발적 아싸와 같은 유형입니다. 
+            </div>
+        </div>
+    </div>
+
+    {% elif code == 'bchd' or code=='bcdh' or code == 'bhcd' %}
+    <!-- 발랄한 탐험가 -->
+    <div class="content">
+        <div class="top">
+            <div class="bg"></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+        </div>
+        <div class="main_info">
+            <div class="white_bg" id="top"></div>
+            <img class="symbol_cat" src="../static/Group 1698.png">
+            <div id="sub1">발랄한 탐험가</div>
+            <div id="sub2">“호기심 천국, 나랑 놀자”"</div>
+            <div class="summary">눈 앞에 펼쳐지는 다양한 일들에 모두 관심갖고 다가가는 편으로, 귀찮음을 느끼고 넘어가는 법이 없습니다. 매사에 열정적인 편입니다. 온힘을 다해 놀고, 반려인에 대한 애정표현도 적극적입니다. 넘쳐나는 호기심을 바탕으로 매순간을 에너지 넘치게 보내며 지냅니다.</div>
+        </div>
+        <div class="analysisResult">
+            <div id="header1">발랄한 미미를</div>
+            <div id="header2">자세하게 분석해봤어요.</div>
+            <div id="chartContainer">
+                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+            </div>
+            <div id="scores">
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{b}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">활발한</div><progress id="hBar" max="{{b}}" min="0" value="{{ h }}"></progress><div id="scoreInt">{{h|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">본능적인</div><progress id="bBar" max="{{b}}" min="0" value="{{ b }}"></progress><div id="scoreInt">{{b|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">친밀한</div><progress id="cBar" max="{{b}}" min="0" value="{{ c }}"></progress><div id="scoreInt">{{c|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">독립적인</div><progress id="dBar" max="{{b}}" min="0" value="{{ d }}"></progress><div id="scoreInt">{{d|int}}</div></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div id="header3">이런 걸 좋아해요!</div>
+            <div id="items">
+                <div id="imgWrap">
+                    <div id="item">
+                        <img src="../static/레이저.png">
+                        <div id="imgLabel" >레이저</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/육포.png">
+                        <div id="imgLabel">육포</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/코인사.png">
+                        <div id="imgLabel">코 인사</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="conclusion">
+                다른 고양이들이라면 경계하고 두려워 할 수 있는 상황이 와도, 경계하기보단 호기심을 갖고 다가가는 편입니다. 낯선 사람이 집에 찾아온 경우도 역시 경계하기 보단 호기심을 갖고 환영합니다. 특유의 밝음으로 항상 에너지와 호기심, 애정이 넘치는 인싸 고양이라고 볼 수 있습니다.
+            </div>
+        </div>
+    </div>
+
+    {% elif code == 'dcbh' or code=='dchb' or code == 'dhcb' %}
+    <!-- 소심한 전략가 -->
+    <div class="content">
+        <div class="top">
+            <div class="bg"></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+        </div>
+        <div class="main_info">
+            <div class="white_bg" id="top"></div>
+            <img class="symbol_cat" src="../static/Group 1699.png">
+            <div id="sub1">소심한 전략가</div>
+            <div id="sub2">“나를 지켜야해 다가오지마!”</div>
+            <div class="summary">늘 주위를 경계하며 긴장하고 있는 듯합니다. 길고양이를 구조해 보호하기 시작한 직후에 이러한 특징들이 자주 나타납니다. 사람과 장난감은 뒷전이고, 늘 도망가고 숨곤 합니다. 대다수의 고양이들은 간식과 장난감들을 통한 놀이를 좋아하지만 이 유형은 조용하고 안정된 상태에서 상황을 좀 더 지켜보고 싶어하는 편입니다.</div>
+        </div>
+        <div class="analysisResult">
+            <div id="header1">소심한 미미를</div>
+            <div id="header2">자세하게 분석해봤어요.</div>
+            <div id="chartContainer">
+                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+            </div>
+            <div id="scores">
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{d}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">활발한</div><progress id="hBar" max="{{d}}" min="0" value="{{ h }}"></progress><div id="scoreInt">{{h|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">본능적인</div><progress id="bBar" max="{{d}}" min="0" value="{{ b }}"></progress><div id="scoreInt">{{b|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">친밀한</div><progress id="cBar" max="{{d}}" min="0" value="{{ c }}"></progress><div id="scoreInt">{{c|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">독립적인</div><progress id="dBar" max="{{d}}" min="0" value="{{ d }}"></progress><div id="scoreInt">{{d|int}}</div></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div id="header3">이런 걸 좋아해요!</div>
+            <div id="items">
+                <div id="imgWrap">
+                    <div id="item">
+                        <img src="../static/숨숨집.png">
+                        <div id="imgLabel" >숨숨집</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/이불.png">
+                        <div id="imgLabel">이불</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/츄르.png">
+                        <div id="imgLabel">츄르</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="conclusion">
+                겉으로는 어떤 행동도 취하고 있지 않는 것으로 보일지 몰라도 속으로는 생존을 위해 온 힘을 다해 달아나는 중일지도 모릅니다. 어두운, 그리고 좁은 공간에 몸을 숨기는 일 이외에는 아직 어떠한 관심도 없어 보입니다. 움직이기를 싫어하는 편이면서 재빠르게 도망가고 숨을 때는 평소 모습과 너무 달라 감탄할 때도 있습니다.
+            </div>
+        </div>
+    </div>
+
+    {% elif code == 'dbch' or code=='dbhc' or code == 'dhbc' %}
+    <!-- 고지식한 평론가 -->
+    <div class="content">
+        <div class="top">
+            <div class="bg"></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+        </div>
+        <div class="main_info">
+            <div class="white_bg" id="top"></div>
+            <img class="symbol_cat" src="../static/Group 1700.png">
+            <div id="sub1">고지식한 평론가</div>
+            <div id="sub2">“가까이 다가오진 말아줘!”</div>
+            <div class="summary">자신만의 기준과 선이 매우 확실한, 독립적인 유형입니다. 적응력이 좋아서 새로운 물건이나 변화된 환경엔 태연하게 행동하는 모습을 보이곤 합니다. 기본적으로 활동적인 성향으로, 반려인과의 놀이를 좋아하기도 합니다. 그러나, 특유의 독립적인 성향 덕분에 사람과 사회적 거리를 유지하며 살아가는 모습이 보입니다.</div>
+        </div>
+        <div class="analysisResult">
+            <div id="header1">고지식한 미미를</div>
+            <div id="header2">자세하게 분석해봤어요.</div>
+            <div id="chartContainer">
+                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+            </div>
+            <div id="scores">
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{d}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">활발한</div><progress id="hBar" max="{{d}}" min="0" value="{{ h }}"></progress><div id="scoreInt">{{h|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">본능적인</div><progress id="bBar" max="{{d}}" min="0" value="{{ b }}"></progress><div id="scoreInt">{{b|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">친밀한</div><progress id="cBar" max="{{d}}" min="0" value="{{ c }}"></progress><div id="scoreInt">{{c|int}}</div></div>
+            <div id="progressWrap"><div style="width: 14.66666666666667vw;">독립적인</div><progress id="dBar" max="{{d}}" min="0" value="{{ d }}"></progress><div id="scoreInt">{{d|int}}</div></div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div id="header3">이런 걸 좋아해요!</div>
+            <div id="items">
+                <div id="imgWrap">
+                    <div id="item">
+                        <img src="../static/캣타워.png">
+                        <div id="imgLabel" >캣타워</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/해먹.png">
+                        <div id="imgLabel">해먹</div>
+                    </div>
+                    <div id="item">
+                        <img src="../static/마따따비.png">
+                        <div id="imgLabel">마따따비</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="conclusion">
+                겉으로는 어떤 행동도 취하고 있지 않는 것으로 보일지 몰라도 속으로는 생존을 위해 온 힘을 다해 달아나는 중일지도 모릅니다. 어두운, 그리고 좁은 공간에 몸을 숨기는 일 이외에는 아직 어떠한 관심도 없어 보입니다. 움직이기를 싫어하는 편이면서 재빠르게 도망가고 숨을 때는 평소 모습과 너무 달라 감탄할 때도 있습니다.
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+    <script>
+        // 최초 값 받기
+        y_score = {{ y }};
+        h_score = {{ h }};
+        b_score = {{ b }};
+        c_score = {{ c }};
+        d_score = {{ d }};
+        // 100점만점으로 환산
+
+        result_code = '{{ code }}'
+        var chartCtx = document.getElementById('radar-chart').getContext('2d');
+        var gradient = chartCtx.createLinearGradient(0, 0, 0, 600);
+        if(result_code[0]=='c'){
+            gradient.addColorStop(0, '#F07C7B')
+            gradient.addColorStop(1, '#F8CAC9')
+        }else if(result_code[0] == 'h'){
+            gradient.addColorStop(0, '#48B896')
+            gradient.addColorStop(1, '#A4DACA')
+        }else if(result_code[0] == 'b'){
+            gradient.addColorStop(0, '#E16F53')
+            gradient.addColorStop(1, '#E9917C')
+        }else if(result_code[0] == 'd'){
+            gradient.addColorStop(0, '#78AEEB')
+            gradient.addColorStop(1, '#98C0EE')
+        }
+        
+        var chartArea = $('#radar-chart');
+        Chart.defaults.color = "#fff";
+        Chart.defaults.font.size = 16;
+        Chart.defaults.font.family = "Pretendard";
+        if(result_code[0]=='c'){
+            Chart.defaults.borderColor = "#FDACAB";
+        }else if(result_code[0] == 'h'){
+            Chart.defaults.borderColor = "#79C4AD";
+        }else if(result_code[0] == 'b'){
+            Chart.defaults.borderColor = "#FF9C84"; 
+        }else if(result_code[0] == 'd'){
+            Chart.defaults.borderColor = "#C9DFF8";
+        }
+        
+        // Chart.defaults.label =false ;
+        // Chart.defaults.tick.showLabelBackdrop = false;
+        var myChart = new Chart(chartArea, {
+            type: 'radar',
+            data: {
+                labels: ["예민한", "활발한", "본능적인", "독립적인", "친밀한"],
+                datasets: [
+                    {
+                        label: 'test',
+                        fill: true,
+                        backgroundColor: gradient,
+                        // borderColor: "#FDACAB",
+                        color: '#ffffff',
+                        // size: 30,
+                        // pointBorder: 0,
+                        pointRadius: 0,
+                        lineTension: 0.24,
+                        // pointBorderColor: "#fff",
+                        // pointBackgroundColor: "rgba(179,181,198,1)",
+                        data: [y_score, h_score, b_score, d_score, c_score]
+                    }
+                ]
+            },
+            options: {
+                responsive: false,
+                plugins: {
+                    legend: {
+                        display: false,
+
+                    },
+                },
+                scales: {
+                    r: {
+                        pointLabels: {
+                            font: {
+                                size: 16
+                            },
+                            grid: {
+                                display: false,
+                                tickLength: 0
+                            }
+                            // display: false // Hides the labels around the radar chart
+                        },
+                        ticks: {
+                            display: false, // Hides the labels in the middel (numbers)
+                            maxTicksLimit: 6,
+                            showLabelBackdrop: false
+                        },
+                        grid: {
+                            color: "#FFFFFF",
+                            tickLength: 0
+                            // borderDashOffset: 30
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>
