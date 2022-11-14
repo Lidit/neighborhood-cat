@@ -4,12 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1 ">
     <link rel="shortcut icon" href="../static/favicon.png">
     <title>이웃냥 성향테스트</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.0/dist/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <style>
+        html{
+            overflow-x: hidden;
+            margin: 0px;
+            padding: 0px;
+        }
+        body {
+            overflow-x: hidden;
+            margin: 0px;
+            padding: 0px;
+        }
         .top {
             margin-top: 92px;
             margin-left: 5.333vw;
@@ -95,6 +105,8 @@
             background: #FFFFFF;
         }
 
+        
+
         #bottom {
             position: absolute;
             /* top: 1294px; */
@@ -102,6 +114,16 @@
             width: 100vw;
             z-index: -1;
             background: #FFFFFF;
+
+        }
+
+        #bottom_bg{
+            width: 100vw;
+            position: absolute;
+            height: 62px;
+            background: #FFFFFF;
+            z-index: -1;
+            margin-top: -61px;
         }
 
         body {
@@ -355,32 +377,27 @@
         }
 
         #yBar::-webkit-progress-value{
-            border-radius: 40px;
             background: #EEC569;
             border-radius: 40px;
             height: 12px;
         }
         
         #hBar::-webkit-progress-value{
-            border-radius: 40px;
             background: #79C4AD;
             border-radius: 40px;
             height: 12px;
         }
         #bBar::-webkit-progress-value{
-            border-radius: 40px;
             background: #FF9C84;
             border-radius: 40px;
             height: 12px;
         }
         #cBar::-webkit-progress-value{
-            border-radius: 40px;
             background: #FDACAB;
             border-radius: 40px;
             height: 12px;
         }
         #dBar::-webkit-progress-value{
-            border-radius: 40px;
             background: #C9DFF8;
             border-radius: 40px;
             height: 12px;
@@ -396,7 +413,7 @@
     <div class="content">
         <div class="top">
             <div class="bg"></div>
-            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back" onclick="window.location.href='/servay'"></input></div>
         </div>
         <div class="main_info">
             <div class="white_bg" id="top"></div>
@@ -441,6 +458,7 @@
                         <div id="imgLabel">츄르</div>
                     </div>
                 </div>
+                <div id="bottom_bg"></div>
             </div>
         </div>
         <div id="bottom">
@@ -456,7 +474,7 @@
     <div class="content">
         <div class="top">
             <div class="bg"></div>
-            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back" onclick="window.location.href='/servay'"></input></div>
         </div>
         <div class="main_info">
             <div class="white_bg" id="top"></div>
@@ -496,6 +514,7 @@
                         <div id="imgLabel">코 인사</div>
                     </div>
                 </div>
+                <div id="bottom_bg"></div>
             </div>
         </div>
         <div id="bottom">
@@ -509,7 +528,7 @@
     <div class="content">
         <div class="top">
             <div class="bg"></div>
-            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back" onclick="window.location.href='/servay'"></input></div>
         </div>
         <div class="main_info">
             <div class="white_bg" id="top"></div>
@@ -549,6 +568,7 @@
                         <div id="imgLabel">포옹</div>
                     </div>
                 </div>
+                <div id="bottom_bg"></div>
             </div>
         </div>
         <div id="bottom">
@@ -562,7 +582,7 @@
     <div class="content">
         <div class="top">
             <div class="bg"></div>
-            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back" onclick="window.location.href='/servay'"></input></div>
         </div>
         <div class="main_info">
             <div class="white_bg" id="top"></div>
@@ -616,7 +636,7 @@
     <div class="content">
         <div class="top">
             <div class="bg"></div>
-            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back" onclick="window.location.href='/servay'"></input></div>
         </div>
         <div class="main_info">
             <div class="white_bg" id="top"></div>
@@ -656,6 +676,7 @@
                         <div id="imgLabel">터널</div>
                     </div>
                 </div>
+                <div id="bottom_bg"></div>
             </div>
         </div>
         <div id="bottom">
@@ -670,7 +691,7 @@
     <div class="content">
         <div class="top">
             <div class="bg"></div>
-            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back" onclick="window.location.href='/servay'"></input></div>
         </div>
         <div class="main_info">
             <div class="white_bg" id="top"></div>
@@ -710,6 +731,7 @@
                         <div id="imgLabel">코 인사</div>
                     </div>
                 </div>
+                <div id="bottom_bg"></div>
             </div>
         </div>
         <div id="bottom">
@@ -724,7 +746,7 @@
     <div class="content">
         <div class="top">
             <div class="bg"></div>
-            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back" onclick="window.location.href='/servay'"></input></div>
         </div>
         <div class="main_info">
             <div class="white_bg" id="top"></div>
@@ -764,6 +786,7 @@
                         <div id="imgLabel">츄르</div>
                     </div>
                 </div>
+                <div id="bottom_bg"></div>
             </div>
         </div>
         <div id="bottom">
@@ -778,7 +801,7 @@
     <div class="content">
         <div class="top">
             <div class="bg"></div>
-            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back"></input></div>
+            <div class="end"><div id="end_text">테스트가 끝났어요!</div><input type="button" id="back" onclick="window.location.href='/servay'"></input></div>
         </div>
         <div class="main_info">
             <div class="white_bg" id="top"></div>
@@ -818,6 +841,7 @@
                         <div id="imgLabel">마따따비</div>
                     </div>
                 </div>
+                <div id="bottom_bg"></div>
             </div>
         </div>
         <div id="bottom">
