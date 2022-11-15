@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1 ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no ">
     <link rel="shortcut icon" href="../static/favicon.png">
     <title>이웃냥 성향테스트</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.0/dist/chart.js"></script>
@@ -177,6 +177,24 @@
         .symbol_cat {
             /* position: relative; */
             /* display: flex; */
+            {% if code == 'cdhb' or code=='cdbh' or code == 'cbdh' %}
+            margin-left: 0px;
+            {% elif code == 'chbd' or code=='chdb' or code == 'cbhd' %}
+            margin-left: 0px;
+            {% elif code == 'hcdb' or code=='hcbd' or code == 'hbcd' %}
+            margin-left: 0px;
+            {% elif code == 'hdcb' or code=='hdbc' or code == 'hbcd' %}
+            margin-left: 0px;
+            {% elif code == 'bdhc' or code=='bdch' or code == 'bhdc' %}
+            margin-left: 0px;
+            {% elif code == 'bchd' or code=='bcdh' or code == 'bhcd' %}
+            margin-left: 6.666vw;
+            {% elif code == 'dcbh' or code=='dchb' or code == 'dhcb' %}
+            margin-left: 0px;
+            {% elif code == 'dbch' or code=='dbhc' or code == 'dhbc' %}
+            margin-left: 0px;
+            {% endif %}
+
         }
 
         .bg {
@@ -942,6 +960,7 @@
         b_score = {{ b }};
         c_score = {{ c }};
         d_score = {{ d }};
+
         // 100점만점으로 환산
 
         result_code = '{{ code }}'
@@ -991,7 +1010,7 @@
                         // size: 30,
                         // pointBorder: 0,
                         pointRadius: 0,
-                        lineTension: 0.24,
+                        lineTension: 0.16,
                         // pointBorderColor: "#fff",
                         // pointBackgroundColor: "rgba(179,181,198,1)",
                         data: [y_score, h_score, b_score, d_score, c_score]
@@ -1020,14 +1039,14 @@
                         },
                         ticks: {
                             display: false, // Hides the labels in the middel (numbers)
-                            maxTicksLimit: 6,
+                            maxTicksLimit: 2,
                             showLabelBackdrop: false
                         },
                         grid: {
                             display: false,
                             color: "#FFFFFF",
-                            tickLength: 0
-                            // borderDashOffset: 30
+                            tickLength: 0,
+                            // borderDashOffset: 10
                         },
                         angleLines: {
                             display: false
