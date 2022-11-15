@@ -14,6 +14,8 @@
         Kakao.init('bbe3293253864b3b39d1814d270335c1'); // 사용하려는 앱의 JavaScript 키 입력
     </script>
     <style>
+        @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
         html{
             overflow-x: hidden;
             margin: 0px;
@@ -303,6 +305,19 @@
             width: 100vw;
             text-align: center;
             align-items: center;
+
+        }
+        #chartContainer canvas{
+            position: relative;
+            z-index: 1;
+        }
+
+        #chartContainer img{
+            z-index: 0;
+            display: inline;
+            position: absolute;
+            margin-top: 40px;
+            left: 25.6vw;
         }
         
         #imgLabel {
@@ -407,9 +422,33 @@
             height: 12px;
         }
 
-        #bottom img{
+        /* #bottom img{
             margin-left: 3.4vw;
             text-align: center;
+        } */
+        #bottom a{
+            margin-left: 6.4vw;
+            vertical-align: middle;
+            text-decoration-line: none;
+        }
+        #bottom a div{
+            
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            width: 327px;
+            height: 58px;
+            font-family: 'Noto Sans KR';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 29px;
+            color: white;
+            background: #6865FA;
+            /* Shadow */
+
+            box-shadow: 3px 3px 15px rgba(35, 35, 35, 0.1);
+            border-radius: 40px;
         }
 
     </style>
@@ -440,7 +479,8 @@
             <div id="header1">한가한 루루를</div>
             <div id="header2">자세하게 분석해봤어요.</div>
             <div id="chartContainer">
-                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+                <canvas id="radar-chart" width="260px" height="260px" style="display: inline;"></canvas>
+                <img src="../static/radar_c.png">
             </div>
             <div id="scores">
             <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{c}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
@@ -476,7 +516,7 @@
                 편입니다. 반려인 이외의 것들에겐 무관심하거나 경계하고 도망치지만, 반려인에게 관심과 애정을 모두 주는 유형입니다.
             </div>
             <a id="kakaotalk-sharing-btn" href="javascript:shareMessage()">
-                <img src="../static/share_kakao.png" alt="카카오톡 공유 보내기 버튼" />
+                <div>카카오톡으로 공유하기</div>
             </a>
         </div>
     </div>
@@ -499,7 +539,8 @@
             <div id="header1">다정한 우니를 </div>
             <div id="header2">자세하게 분석해봤어요.</div>
             <div id="chartContainer">
-                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+                <canvas id="radar-chart" width="260px" height="260px" style="display: inline;"></canvas>
+                <img src="../static/radar_c.png">
             </div>
             <div id="scores">
             <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{c}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
@@ -534,7 +575,7 @@
                 하지만 그 마음이 한번 열리면 특유의 발랄함이 마구 뿜어져 나올 것입니다. 익숙한 장소에서 매일 보는 사람들과 신나게 놀기를 가장 좋아합니다. 그만큼 반려인에 대한 애정표현은 결코 확실하게 하는 편입니다. 놀고 싶거나 쓰다듬기 받기를 원하는 마음을 솔직하게 표현하는 유형입니다.
             </div>
             <a id="kakaotalk-sharing-btn" href="javascript:shareMessage()">
-                <img src="../static/share_kakao.png" alt="카카오톡 공유 보내기 버튼" />
+                <div>카카오톡으로 공유하기</div>
             </a>
         </div>
     </div>
@@ -556,7 +597,8 @@
             <div id="header1">게으른 치치를</div>
             <div id="header2">자세하게 분석해봤어요.</div>
             <div id="chartContainer">
-                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+                <canvas id="radar-chart" width="260px" height="260px" style="display: inline;"></canvas>
+                <img src="../static/radar_h.png">
             </div>
             <div id="scores">
             <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{h}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
@@ -591,7 +633,7 @@
                 사냥놀이는 그리 좋아하지 않지만 반려인에 대한 애정과 관심은 그치지 않습니다. 애교를 부리며 반려인에게 앵기기도 하고, 반려인이 무언가에 열중하고 있어도 다가가서 관심을 구해, 곤란한 상황이 펼쳐지곤 합니다.
             </div>
             <a id="kakaotalk-sharing-btn" href="javascript:shareMessage()">
-                <img src="../static/share_kakao.png" alt="카카오톡 공유 보내기 버튼" />
+                <div>카카오톡으로 공유하기</div>
             </a>
         </div>
     </div>
@@ -613,7 +655,8 @@
             <div id="header1">미지의 가루를</div>
             <div id="header2">자세하게 분석해봤어요.</div>
             <div id="chartContainer">
-                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+                <canvas id="radar-chart" width="260px" height="260px" style="display: inline;"></canvas>
+                <img src="../static/radar_h.png">
             </div>
             <div id="scores">
             <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{h}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
@@ -647,7 +690,7 @@
                 환경이 변해도 큰 신경을 쓰지 않고 평소와 같이, 평온한 일상을 보내는 모습을 보여줍니다. 혼자 있는 시간을 보낼 때 더 즐거워 보이는 때도 있는 듯 합니다. 이 유형에게 어울리는 단어들을 꼽자면 명확한 의사표현, 도도함, 당당함, 명랑함 입니다. 혼자서도 잘 놀며 혼자 있기를 즐기는 자발적 아싸와 같은 유형입니다. 
             </div>
             <a id="kakaotalk-sharing-btn" href="javascript:shareMessage()">
-                <img src="../static/share_kakao.png" alt="카카오톡 공유 보내기 버튼" />
+                <div>카카오톡으로 공유하기</div>
             </a>
         </div>
     </div>
@@ -670,7 +713,8 @@
             <div id="header1">새침한 미미를</div>
             <div id="header2">자세하게 분석해봤어요.</div>
             <div id="chartContainer">
-                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+                <canvas id="radar-chart" width="260px" height="260px" style="display: inline;"></canvas>
+                <img src="../static/radar_b.png">
             </div>
             <div id="scores">
             <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{b}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
@@ -705,7 +749,7 @@
                 환경이 변해도 큰 신경을 쓰지 않고 평소와 같이, 평온한 일상을 보내는 모습을 보여줍니다. 혼자 있는 시간을 보낼 때 더 즐거워 보이는 때도 있는 듯 합니다. 이 유형에게 어울리는 단어들을 꼽자면 명확한 의사표현, 도도함, 당당함, 명랑함 입니다. 혼자서도 잘 놀며 혼자 있기를 즐기는 자발적 아싸와 같은 유형입니다. 
             </div>
             <a id="kakaotalk-sharing-btn" href="javascript:shareMessage()">
-                <img src="../static/share_kakao.png" alt="카카오톡 공유 보내기 버튼" />
+                <div>카카오톡으로 공유하기</div>
             </a>
         </div>
     </div>
@@ -728,7 +772,8 @@
             <div id="header1">발랄한 미미를</div>
             <div id="header2">자세하게 분석해봤어요.</div>
             <div id="chartContainer">
-                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+                <canvas id="radar-chart" width="260px" height="260px" style="display: inline;"></canvas>
+                <img src="../static/radar_b.png">
             </div>
             <div id="scores">
             <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{b}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
@@ -763,7 +808,7 @@
                 다른 고양이들이라면 경계하고 두려워 할 수 있는 상황이 와도, 경계하기보단 호기심을 갖고 다가가는 편입니다. 낯선 사람이 집에 찾아온 경우도 역시 경계하기 보단 호기심을 갖고 환영합니다. 특유의 밝음으로 항상 에너지와 호기심, 애정이 넘치는 인싸 고양이라고 볼 수 있습니다.
             </div>
             <a id="kakaotalk-sharing-btn" href="javascript:shareMessage()">
-                <img src="../static/share_kakao.png" alt="카카오톡 공유 보내기 버튼" />
+                <div>카카오톡으로 공유하기</div>
             </a>
         </div>
     </div>
@@ -786,7 +831,8 @@
             <div id="header1">소심한 미미를</div>
             <div id="header2">자세하게 분석해봤어요.</div>
             <div id="chartContainer">
-                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+                <canvas id="radar-chart" width="260px" height="260px" style="display: inline;"></canvas>
+                <img src="../static/radar_d.png">
             </div>
             <div id="scores">
             <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{d}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
@@ -821,7 +867,7 @@
                 겉으로는 어떤 행동도 취하고 있지 않는 것으로 보일지 몰라도 속으로는 생존을 위해 온 힘을 다해 달아나는 중일지도 모릅니다. 어두운, 그리고 좁은 공간에 몸을 숨기는 일 이외에는 아직 어떠한 관심도 없어 보입니다. 움직이기를 싫어하는 편이면서 재빠르게 도망가고 숨을 때는 평소 모습과 너무 달라 감탄할 때도 있습니다.
             </div>
             <a id="kakaotalk-sharing-btn" href="javascript:shareMessage()">
-                <img src="../static/share_kakao.png" alt="카카오톡 공유 보내기 버튼" />
+                <div>카카오톡으로 공유하기</div>
             </a>
         </div>
     </div>
@@ -844,7 +890,8 @@
             <div id="header1">고지식한 미미를</div>
             <div id="header2">자세하게 분석해봤어요.</div>
             <div id="chartContainer">
-                <canvas id="radar-chart" width="250px" height="250px" style="display: inline;"></canvas>
+                <canvas id="radar-chart" width="260px" height="260px" style="display: inline;"></canvas>
+                <img src="../static/radar_d.png">
             </div>
             <div id="scores">
             <div id="progressWrap"><div style="width: 14.66666666666667vw;">예민한</div><progress id="yBar" max="{{d}}" min="0" value="{{ y }}"></progress><div id="scoreInt">{{y|int}}</div></div>
@@ -878,12 +925,12 @@
             <div class="conclusion">
                 겉으로는 어떤 행동도 취하고 있지 않는 것으로 보일지 몰라도 속으로는 생존을 위해 온 힘을 다해 달아나는 중일지도 모릅니다. 어두운, 그리고 좁은 공간에 몸을 숨기는 일 이외에는 아직 어떠한 관심도 없어 보입니다. 움직이기를 싫어하는 편이면서 재빠르게 도망가고 숨을 때는 평소 모습과 너무 달라 감탄할 때도 있습니다.
             </div>
-            <div>
             <a id="kakaotalk-sharing-btn" href="javascript:shareMessage()">
-                <img src="../static/share_kakao.png" alt="카카오톡 공유 보내기 버튼" />
+                <div>카카오톡으로 공유하기</div>
             </a>
         </div>
         </div>
+
     </div>
 
     {% endif %}
@@ -968,7 +1015,7 @@
                             grid: {
                                 display: false,
                                 tickLength: 0
-                            }
+                            },
                             // display: false // Hides the labels around the radar chart
                         },
                         ticks: {
@@ -977,10 +1024,14 @@
                             showLabelBackdrop: false
                         },
                         grid: {
+                            display: false,
                             color: "#FFFFFF",
                             tickLength: 0
                             // borderDashOffset: 30
-                        }
+                        },
+                        angleLines: {
+                            display: false
+                        },
                     }
                 }
             }

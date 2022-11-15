@@ -80,13 +80,13 @@ def showResult():
     # return render_template('result.html', y=y, h=h, b=b, c=c, d=d)
 
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    score_receive = request.form['score_give']  # 클라이언트로부터 점수를 받는 부분
-    comment_receive = request.form['comment_give']  # 클라이언트로부터 comment를 받는 부분
+# @app.route('/submit', methods=['POST'])
+# def submit():
+#     score_receive = request.form['score_give']  # 클라이언트로부터 점수를 받는 부분
+#     comment_receive = request.form['comment_give']  # 클라이언트로부터 comment를 받는 부분
 
-    return jsonify({'result': 'success'})
+#     return jsonify({'result': 'success'})
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=5000, debug=False)
