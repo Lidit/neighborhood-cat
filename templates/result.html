@@ -961,6 +961,10 @@
         c_score = {{ c }};
         d_score = {{ d }};
 
+        scoreList = [y_score, h_score, b_score,c_score, d_score];
+
+        maxScore = Math.max.apply(null,scoreList);
+
         // 100점만점으로 환산
 
         result_code = '{{ code }}'
@@ -1033,24 +1037,26 @@
                             },
                             grid: {
                                 display: false,
-                                tickLength: 0
+                                tickLength: 1
                             },
-                            // display: false // Hides the labels around the radar chart
+                            display: true // Hides the labels around the radar chart
                         },
                         ticks: {
                             display: false, // Hides the labels in the middel (numbers)
-                            maxTicksLimit: 2,
+                            maxTicksLimit: 6,
                             showLabelBackdrop: false
                         },
                         grid: {
                             display: false,
                             color: "#FFFFFF",
-                            tickLength: 0,
+                            tickLength: 1,
                             // borderDashOffset: 10
                         },
                         angleLines: {
-                            display: false
+                            display: true
                         },
+                        suggestedMin: 20,
+                        suggestedMax: maxScore,
                     }
                 }
             }
