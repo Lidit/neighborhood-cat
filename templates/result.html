@@ -201,8 +201,8 @@
             margin: 0;
             position: absolute;
             z-index: -1;
-            height: 330%;
-            width: 330%;
+            height: 340%;
+            width: 340%;
             left: -150%;
             top: -100%;
             {% if code == 'cdhb' or code=='cdbh' or code == 'cbdh' %}
@@ -243,6 +243,7 @@
             /* background-position:  3px 0, 5px 0, 3px 0, 3px 0; */
             background-size: 78.44px 78.93px;
             background-repeat: repeat;
+        
             transform: matrix(0.77, -0.67, 0.62, 0.76, 0, 0);
         }
 
@@ -1017,7 +1018,7 @@
                         lineTension: 0.16,
                         // pointBorderColor: "#fff",
                         // pointBackgroundColor: "rgba(179,181,198,1)",
-                        data: [y_score, h_score, b_score, d_score, c_score]
+                        data: [y_score+30, h_score+30, b_score+30, d_score+30, c_score+30]
                     }
                 ]
             },
@@ -1043,21 +1044,22 @@
                         },
                         ticks: {
                             display: false, // Hides the labels in the middel (numbers)
-                            maxTicksLimit: 6,
+                            maxTicksLimit: 5,
                             showLabelBackdrop: false
                         },
                         grid: {
                             display: false,
                             color: "#FFFFFF",
-                            tickLength: 1,
                             // borderDashOffset: 10
                         },
                         angleLines: {
-                            display: true
+                            display: false
                         },
-                        suggestedMin: 20,
-                        suggestedMax: maxScore,
+                        beginAtZero: true,
+                        min: 0,
+                        max: maxScore+30,
                     }
+                    
                 }
             }
         });
