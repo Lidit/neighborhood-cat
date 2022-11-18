@@ -51,13 +51,10 @@ def showResult():
 
     score_dict = {'h': h, 'b': b, 'c': c, 'd': d}
     d1 = dict(sorted(score_dict.items(), key=lambda x: x[1], reverse=True))
-    print(d1)
-    print(d1.keys())
+
     code = ""
     for i in d1.keys():
         code += str(i)
-
-    print(code)
 
     return render_template('result.html', y=y, h=h, b=b, c=c, d=d, code=code)
 
