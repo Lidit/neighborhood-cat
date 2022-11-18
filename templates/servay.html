@@ -379,6 +379,30 @@
             left: 0;
         }
 
+        #toast {
+            width: 42vw;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    padding: 15px 20px;
+    transform: translate(-50%, 10px);
+    border-radius: 30px;
+    overflow: hidden;
+    font-size: .8rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s, visibility .5s, transform .5s;
+    background: rgba(0, 0, 0, .35);
+    color: #fff;
+    z-index: 10000;
+}
+#toast.reveal {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0)
+}
+
+
     </style>
 
     <script>
@@ -402,12 +426,30 @@
             $('.modal').hide();
         });
 
+        function toast(string) {
+    const toast = document.getElementById("toast");
+
+    toast.classList.contains("reveal") ?
+        (clearTimeout(removeToast), removeToast = setTimeout(function () {
+            document.getElementById("toast").classList.remove("reveal")
+        }, 1000)) :
+        removeToast = setTimeout(function () {
+            document.getElementById("toast").classList.remove("reveal")
+        }, 1000)
+    toast.classList.add("reveal"),
+        toast.innerText = string
+}
+
         function next(currentQ) {
             if (que.indexOf(currentQ) >= 4) {
                 console.log('마지막 질문임');
                 var lating = 0;
                 for (i = 1; i <= 6; i++) {
-                    lating += parseInt($("input[name=q" + i + "_score]:checked").val());
+                    lating += parseInt($("input[name=q" + i + "_score_"+currentQ+"]:checked").val());
+                    if($("input[name=q" + i + "_score_"+currentQ+"]:checked").is(':checked') == false){
+                        toast('설문을 모두 입력해 주세요.');
+                        return;
+                    }
                 }
                 score.push(lating);
                 submit(score);
@@ -420,10 +462,15 @@
                 },3000);
 
             } else {
+                
                 var lating = 0;
                 for (i = 1; i <= 6; i++) {
                     // y_lating += parseInt($(".score "+currentQ+" input[name=q" + i + "_score]:checked").val());
-                    lating += parseInt($("input[name=q" + i + "_score]:checked").val());
+                    lating += parseInt($("input[name=q" + i + "_score_"+currentQ+"]:checked").val());
+                    if($("input[name=q" + i + "_score_"+currentQ+"]:checked").is(':checked') == false){
+                        toast('설문을 모두 입력해 주세요.');
+                        return;
+                    }
                 }
                 score.push(lating);
                 nextQ = que[que.indexOf(currentQ) + 1];
@@ -507,11 +554,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score y" id="score1" name="q1_score" value="1" onclick="check_progress('y')"/>
-                <input type="radio" class="score y" id="score2" name="q1_score" value="2" onclick="check_progress('y')"/>
-                <input type="radio" class="score y" id="score3" name="q1_score" value="3" onclick="check_progress('y')"/>
-                <input type="radio" class="score y" id="score4" name="q1_score" value="4" onclick="check_progress('y')"/>
-                <input type="radio" class="score y" id="score5" name="q1_score" value="5" onclick="check_progress('y')"/>
+                <input type="radio" class="score y" id="score1" name="q1_score_y" value="1" onclick="check_progress('y')"/>
+                <input type="radio" class="score y" id="score2" name="q1_score_y" value="2" onclick="check_progress('y')"/>
+                <input type="radio" class="score y" id="score3" name="q1_score_y" value="3" onclick="check_progress('y')"/>
+                <input type="radio" class="score y" id="score4" name="q1_score_y" value="4" onclick="check_progress('y')"/>
+                <input type="radio" class="score y" id="score5" name="q1_score_y" value="5" onclick="check_progress('y')"/>
             </div>
         </div>
         <hr>
@@ -526,11 +573,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score y" name="q2_score" value="1" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q2_score" value="2" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q2_score" value="3" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q2_score" value="4" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q2_score" value="5" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q2_score_y" value="1" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q2_score_y" value="2" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q2_score_y" value="3" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q2_score_y" value="4" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q2_score_y" value="5" onclick="check_progress('y')">
             </div>
         </div>
         <hr>
@@ -545,11 +592,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score y" name="q3_score" value="1" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q3_score" value="2" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q3_score" value="3" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q3_score" value="4" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q3_score" value="5" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q3_score_y" value="1" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q3_score_y" value="2" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q3_score_y" value="3" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q3_score_y" value="4" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q3_score_y" value="5" onclick="check_progress('y')">
             </div>
         </div>
         <hr>
@@ -564,11 +611,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score y" name="q4_score" value="1" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q4_score" value="2" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q4_score" value="3" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q4_score" value="4" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q4_score" value="5" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q4_score_y" value="1" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q4_score_y" value="2" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q4_score_y" value="3" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q4_score_y" value="4" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q4_score_y" value="5" onclick="check_progress('y')">
             </div>
         </div>
         <hr>
@@ -583,11 +630,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score y" name="q5_score" value="1" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q5_score" value="2" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q5_score" value="3" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q5_score" value="4" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q5_score" value="5" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q5_score_y" value="1" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q5_score_y" value="2" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q5_score_y" value="3" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q5_score_y" value="4" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q5_score_y" value="5" onclick="check_progress('y')">
             </div>
         </div>
         <hr>
@@ -602,11 +649,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score y" name="q6_score" value="1" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q6_score" value="2" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q6_score" value="3" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q6_score" value="4" onclick="check_progress('y')">
-                <input type="radio" class="score y" name="q6_score" value="5" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q6_score_y" value="1" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q6_score_y" value="2" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q6_score_y" value="3" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q6_score_y" value="4" onclick="check_progress('y')">
+                <input type="radio" class="score y" name="q6_score_y" value="5" onclick="check_progress('y')">
             </div>
         </div>
         <hr>
@@ -637,11 +684,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q1_score" value="1" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q1_score" value="2" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q1_score" value="3" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q1_score" value="4" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q1_score" value="5" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q1_score_h" value="1" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q1_score_h" value="2" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q1_score_h" value="3" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q1_score_h" value="4" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q1_score_h" value="5" onclick="check_progress('h')">
             </div>
         </div>
         <hr>
@@ -656,11 +703,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q2_score" value="1" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q2_score" value="2" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q2_score" value="3" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q2_score" value="4" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q2_score" value="5" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q2_score_h" value="1" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q2_score_h" value="2" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q2_score_h" value="3" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q2_score_h" value="4" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q2_score_h" value="5" onclick="check_progress('h')">
             </div>
         </div>
         <hr>
@@ -675,11 +722,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q3_score" value="1" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q3_score" value="2" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q3_score" value="3" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q3_score" value="4" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q3_score" value="5" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q3_score_h" value="1" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q3_score_h" value="2" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q3_score_h" value="3" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q3_score_h" value="4" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q3_score_h" value="5" onclick="check_progress('h')">
             </div>
         </div>
         <hr>
@@ -694,11 +741,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q4_score" value="1" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q4_score" value="2" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q4_score" value="3" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q4_score" value="4" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q4_score" value="5" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q4_score_h" value="1" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q4_score_h" value="2" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q4_score_h" value="3" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q4_score_h" value="4" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q4_score_h" value="5" onclick="check_progress('h')">
             </div>
         </div>
         <hr>
@@ -713,11 +760,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q5_score" value="1" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q5_score" value="2" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q5_score" value="3" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q5_score" value="4" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q5_score" value="5" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q5_score_h" value="1" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q5_score_h" value="2" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q5_score_h" value="3" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q5_score_h" value="4" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q5_score_h" value="5" onclick="check_progress('h')">
             </div>
         </div>
         <hr>
@@ -732,11 +779,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q6_score" value="1" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q6_score" value="2" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q6_score" value="3" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q6_score" value="4" onclick="check_progress('h')">
-                <input type="radio" class="score" name="q6_score" value="5" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q6_score_h" value="1" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q6_score_h" value="2" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q6_score_h" value="3" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q6_score_h" value="4" onclick="check_progress('h')">
+                <input type="radio" class="score" name="q6_score_h" value="5" onclick="check_progress('h')">
             </div>
         </div>
         <hr>
@@ -767,11 +814,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q1_score" value="1" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q1_score" value="2" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q1_score" value="3" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q1_score" value="4" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q1_score" value="5" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q1_score_b" value="1" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q1_score_b" value="2" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q1_score_b" value="3" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q1_score_b" value="4" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q1_score_b" value="5" onclick="check_progress('b')">
             </div>
         </div>
         <hr>
@@ -786,11 +833,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q2_score" value="1" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q2_score" value="2" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q2_score" value="3" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q2_score" value="4" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q2_score" value="5" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q2_score_b" value="1" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q2_score_b" value="2" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q2_score_b" value="3" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q2_score_b" value="4" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q2_score_b" value="5" onclick="check_progress('b')">
             </div>
         </div>
         <hr>
@@ -805,11 +852,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q3_score" value="1" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q3_score" value="2" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q3_score" value="3" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q3_score" value="4" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q3_score" value="5" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q3_score_b" value="1" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q3_score_b" value="2" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q3_score_b" value="3" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q3_score_b" value="4" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q3_score_b" value="5" onclick="check_progress('b')">
             </div>
         </div>
         <hr>
@@ -824,11 +871,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q4_score" value="1" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q4_score" value="2" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q4_score" value="3" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q4_score" value="4" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q4_score" value="5" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q4_score_b" value="1" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q4_score_b" value="2" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q4_score_b" value="3" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q4_score_b" value="4" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q4_score_b" value="5" onclick="check_progress('b')">
             </div>
         </div>
         <hr>
@@ -843,11 +890,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q5_score" value="1" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q5_score" value="2" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q5_score" value="3" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q5_score" value="4" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q5_score" value="5" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q5_score_b" value="1" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q5_score_b" value="2" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q5_score_b" value="3" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q5_score_b" value="4" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q5_score_b" value="5" onclick="check_progress('b')">
             </div>
         </div>
         <hr>
@@ -862,11 +909,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q6_score" value="1" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q6_score" value="2" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q6_score" value="3" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q6_score" value="4" onclick="check_progress('b')">
-                <input type="radio" class="score" name="q6_score" value="5" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q6_score_b" value="1" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q6_score_b" value="2" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q6_score_b" value="3" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q6_score_b" value="4" onclick="check_progress('b')">
+                <input type="radio" class="score" name="q6_score_b" value="5" onclick="check_progress('b')">
             </div>
         </div>
         <hr>
@@ -897,11 +944,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q1_score" value="1" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q1_score" value="2" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q1_score" value="3" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q1_score" value="4" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q1_score" value="5" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q1_score_c" value="1" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q1_score_c" value="2" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q1_score_c" value="3" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q1_score_c" value="4" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q1_score_c" value="5" onclick="check_progress('c')">
             </div>
         </div>
         <hr>
@@ -916,11 +963,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q2_score" value="1" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q2_score" value="2" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q2_score" value="3" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q2_score" value="4" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q2_score" value="5" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q2_score_c" value="1" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q2_score_c" value="2" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q2_score_c" value="3" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q2_score_c" value="4" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q2_score_c" value="5" onclick="check_progress('c')">
             </div>
         </div>
         <hr>
@@ -935,11 +982,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q3_score" value="1" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q3_score" value="2" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q3_score" value="3" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q3_score" value="4" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q3_score" value="5" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q3_score_c" value="1" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q3_score_c" value="2" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q3_score_c" value="3" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q3_score_c" value="4" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q3_score_c" value="5" onclick="check_progress('c')">
             </div>
         </div>
         <hr>
@@ -954,11 +1001,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q4_score" value="1" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q4_score" value="2" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q4_score" value="3" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q4_score" value="4" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q4_score" value="5" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q4_score_c" value="1" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q4_score_c" value="2" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q4_score_c" value="3" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q4_score_c" value="4" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q4_score_c" value="5" onclick="check_progress('c')">
             </div>
         </div>
         <hr>
@@ -973,11 +1020,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q5_score" value="1" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q5_score" value="2" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q5_score" value="3" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q5_score" value="4" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q5_score" value="5" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q5_score_c" value="1" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q5_score_c" value="2" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q5_score_c" value="3" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q5_score_c" value="4" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q5_score_c" value="5" onclick="check_progress('c')">
             </div>
         </div>
         <hr>
@@ -992,11 +1039,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q6_score" value="1" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q6_score" value="2" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q6_score" value="3" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q6_score" value="4" onclick="check_progress('c')">
-                <input type="radio" class="score" name="q6_score" value="5" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q6_score_c" value="1" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q6_score_c" value="2" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q6_score_c" value="3" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q6_score_c" value="4" onclick="check_progress('c')">
+                <input type="radio" class="score" name="q6_score_c" value="5" onclick="check_progress('c')">
             </div>
         </div>
         <hr>
@@ -1027,11 +1074,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q1_score" value="1" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q1_score" value="2" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q1_score" value="3" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q1_score" value="4" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q1_score" value="5" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q1_score_d" value="1" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q1_score_d" value="2" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q1_score_d" value="3" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q1_score_d" value="4" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q1_score_d" value="5" onclick="check_progress('d')">
             </div>
         </div>
         <hr>
@@ -1046,11 +1093,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q2_score" value="1" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q2_score" value="2" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q2_score" value="3" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q2_score" value="4" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q2_score" value="5" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q2_score_d" value="1" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q2_score_d" value="2" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q2_score_d" value="3" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q2_score_d" value="4" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q2_score_d" value="5" onclick="check_progress('d')">
             </div>
         </div>
         <hr>
@@ -1065,11 +1112,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q3_score" value="1" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q3_score" value="2" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q3_score" value="3" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q3_score" value="4" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q3_score" value="5" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q3_score_d" value="1" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q3_score_d" value="2" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q3_score_d" value="3" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q3_score_d" value="4" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q3_score_d" value="5" onclick="check_progress('d')">
             </div>
         </div>
         <hr>
@@ -1084,11 +1131,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q4_score" value="1" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q4_score" value="2" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q4_score" value="3" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q4_score" value="4" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q4_score" value="5" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q4_score_d" value="1" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q4_score_d" value="2" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q4_score_d" value="3" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q4_score_d" value="4" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q4_score_d" value="5" onclick="check_progress('d')">
             </div>
         </div>
         <hr>
@@ -1103,11 +1150,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q5_score" value="1" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q5_score" value="2" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q5_score" value="3" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q5_score" value="4" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q5_score" value="5" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q5_score_d" value="1" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q5_score_d" value="2" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q5_score_d" value="3" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q5_score_d" value="4" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q5_score_d" value="5" onclick="check_progress('d')">
             </div>
         </div>
         <hr>
@@ -1122,11 +1169,11 @@
             </div>
             <br>
             <div class="radio_wrap">
-                <input type="radio" class="score" name="q6_score" value="1" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q6_score" value="2" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q6_score" value="3" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q6_score" value="4" onclick="check_progress('d')">
-                <input type="radio" class="score" name="q6_score" value="5" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q6_score_d" value="1" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q6_score_d" value="2" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q6_score_d" value="3" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q6_score_d" value="4" onclick="check_progress('d')">
+                <input type="radio" class="score" name="q6_score_d" value="5" onclick="check_progress('d')">
             </div>
         </div>
         <hr>
@@ -1144,6 +1191,7 @@
         </div>
     </div>
 
+    <div id="toast"></div>
 </body>
 
 </html>
